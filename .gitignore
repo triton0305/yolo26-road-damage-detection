@@ -1,0 +1,55 @@
+# Model weights and training outputs
+*.pt
+*.pth
+*.onnx
+*.engine
+/models/pretrained/
+/runs/
+
+# Local datasets and generated results
+/data/
+/datasets/
+/test/
+/result/
+/result_*/
+/results/*
+!/results/EXPERIMENTS.md
+*.cache
+
+# Dataset labels and local notes
+*.txt
+!/requirements.txt
+/docs/notes/
+
+# Local notebooks
+*.ipynb
+
+# Python environments and caches
+/.venv/
+/venv/
+__pycache__/
+*.py[cod]
+
+# Local-only legacy code
+/scripts/legacy/
+/train.py
+/yolo11_kernel_dead.py
+/yolo11_pt_version_error.py
+/road_picture_detection_3horizontal.py
+/road_video_detection_3horizontal.py
+/road_video_detection_tiled.py
+
+# Revised-model comparison experiments (kept locally)
+/scripts/data/compare_yolo_predictions.py
+/scripts/data/import_anylabeling_json.py
+/scripts/data/prepare_galuxy_revised_dataset.py
+/scripts/inference/predict_galuxy_revised.py
+
+# Files moved to their GitHub-facing locations
+/team02.pdf
+
+# Editor and operating-system files
+/.vscode/
+/.idea/
+.DS_Store
+Thumbs.db

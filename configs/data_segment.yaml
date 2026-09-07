@@ -1,0 +1,14 @@
+path: D:/road_yolo_segment
+
+train: train/images
+val: valid/images
+
+nc: 6
+
+names:
+  0: 응력완화줄눈 화살표
+  1: 응력완화줄눈 오각형
+  2: 응력완화줄눈 삼각형
+  3: 응력완화줄눈
+  4: 신축이음부
+  5: 차선
