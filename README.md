@@ -34,8 +34,9 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
 > AI Hub 고해상도 도로노면 이미지 데이터로 학습한 모델의 실도로 환경 추론 결과입니다.
 
 ### Detection
-![Uploading det_picture_093.jpg…]()
-![Uploading det_picture_152.jpg…]()
+<img width="5712" height="3212" alt="det_picture_152" src="https://github.com/user-attachments/assets/fb90eb62-eb99-40b5-b76f-00abdba79b65" />
+<img width="5712" height="3212" alt="det_picture_093" src="https://github.com/user-attachments/assets/fa2a9775-c140-4ecb-9ada-729e01a59654" />
+
 
 
 ### Segmentation
