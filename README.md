@@ -27,27 +27,6 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
 
 모델 가중치와 학습 결과는 용량 문제로 Git에 포함하지 않습니다. 실험별 변경점과 평가 기준은 [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md)에 정리되어 있습니다.
 
-## 🎥 Demo Video
-
-[![Road Surface Detection Demo](https://img.youtube.com/vi/BOlS7ECXjTI/0.jpg)](https://www.youtube.com/watch?v=BOlS7ECXjTI)
-
-> AI Hub 고해상도 도로노면 이미지 데이터로 학습한 모델의 실도로 환경 추론 결과입니다.
-
-### Detection
-<img width="5712" height="3212" alt="det_picture_152" src="https://github.com/user-attachments/assets/fb90eb62-eb99-40b5-b76f-00abdba79b65" />
-<img width="5712" height="3212" alt="det_picture_093" src="https://github.com/user-attachments/assets/fa2a9775-c140-4ecb-9ada-729e01a59654" />
-
-
-
-### Segmentation
-<img width="5712" height="3212" alt="seg_picture_093" src="https://github.com/user-attachments/assets/aea8f81a-55e4-4532-abcb-d9aaa2144c36" />
-<img width="5712" height="3212" alt="seg_picture_152" src="https://github.com/user-attachments/assets/1e55b76c-9042-44ac-b203-21c4fc766edd" />
-
-### Detection + Segmentation
-<img width="5712" height="3212" alt="picture_093" src="https://github.com/user-attachments/assets/ee6f54dd-c0c9-4d70-96ce-7be50527ce80" />
-<img width="5712" height="3212" alt="picture_152" src="https://github.com/user-attachments/assets/9606959c-b63d-4ef2-a0bf-61a8f80a0bdf" />
-
-
 ## 프로젝트 파이프라인
 
 ```text
@@ -79,7 +58,27 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
                       이미지 / 영상 결과 출력
 ```
 
-Detection과 Segmentation은 하나의 모델로 동시에 학습한 것이 아니라 각각 독립적으로 학습했습니다. 최종 단계에서는 동일한 입력 이미지와 영상에 두 모델을 각각 적용한 뒤, Detection의 Bounding Box와 Segmentation의 Polygon Mask를 하나의 결과로 합성했습니다.
+최종 단계에서는 동일한 입력 이미지와 영상에 두 모델을 각각 적용한 뒤, Detection의 Bounding Box와 Segmentation의 Polygon Mask를 하나의 결과로 합성했습니다.
+
+## 🎥 Demo Video
+
+[![Road Surface Detection Demo](https://img.youtube.com/vi/BOlS7ECXjTI/0.jpg)](https://www.youtube.com/watch?v=BOlS7ECXjTI)
+
+> AI Hub 고해상도 도로노면 이미지 데이터로 학습한 모델의 실도로 환경 추론 결과입니다.
+
+### Detection
+<img width="5712" height="3212" alt="det_picture_152" src="https://github.com/user-attachments/assets/fb90eb62-eb99-40b5-b76f-00abdba79b65" />
+<img width="5712" height="3212" alt="det_picture_093" src="https://github.com/user-attachments/assets/fa2a9775-c140-4ecb-9ada-729e01a59654" />
+
+
+
+### Segmentation
+<img width="5712" height="3212" alt="seg_picture_093" src="https://github.com/user-attachments/assets/aea8f81a-55e4-4532-abcb-d9aaa2144c36" />
+<img width="5712" height="3212" alt="seg_picture_152" src="https://github.com/user-attachments/assets/1e55b76c-9042-44ac-b203-21c4fc766edd" />
+
+### Detection + Segmentation
+<img width="5712" height="3212" alt="picture_093" src="https://github.com/user-attachments/assets/ee6f54dd-c0c9-4d70-96ce-7be50527ce80" />
+<img width="5712" height="3212" alt="picture_152" src="https://github.com/user-attachments/assets/9606959c-b63d-4ef2-a0bf-61a8f80a0bdf" />
 
 ## Detection
 
