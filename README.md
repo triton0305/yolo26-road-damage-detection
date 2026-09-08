@@ -24,7 +24,7 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
 * 최종 체크포인트: `galuxy_segment_manual_v1/weights/epoch30.pt`
 * Confidence threshold: `0.50`
 
-모델 가중치와 학습 결과는 용량 문제로 Git에 포함하지 않습니다. 실험별 변경점과 평가 기준은 [`results`](results)에 정리되어 있습니다.
+모델 가중치와 전체 학습 출력은 용량 문제로 Git에 포함하지 않습니다. 실험별 변경점과 평가 기준은 [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md), 선별한 학습 곡선과 epoch별 원본 지표는 [`results/detection`](results/detection/README.md)과 [`results/segmentation`](results/segmentation/README.md)에 정리되어 있습니다.
 
 ## 프로젝트 파이프라인
 
@@ -160,7 +160,7 @@ scripts/data/         데이터 변환과 학습 데이터 준비
 scripts/training/     모델 학습 및 추가 학습
 scripts/inference/    모델 추론
 scripts/evaluation/   TP·FP·FN 기반 Detection 평가
-results/              실험 기록 문서
+results/              실험 기록, 선별 학습 곡선과 epoch별 지표
 models/pretrained/    로컬 사전학습 가중치, Git 제외
 runs/                 학습 체크포인트와 그래프, Git 제외
 ```
@@ -173,7 +173,10 @@ runs/                 학습 체크포인트와 그래프, Git 제외
 | `scripts/data/prepare_galuxy_weighted_dataset.py` | Galaxy 비중을 높인 v3 데이터셋 준비          |
 | `scripts/training/train_galuxy_weighted.py`       | v3 weighted 모델 학습                 |
 | `scripts/training/train_galuxy_revised.py`        | 수정 라벨로 최종 v4 Detection 모델 학습      |
+| `scripts/training/train_galuxy_segment_manual.py` | 수동 Polygon Segmentation 추가 학습          |
 | `scripts/inference/predict_galuxy_weighted.py`    | 이미지 일괄 추론과 예측 라벨 저장               |
+| `scripts/inference/predict_combined_final.py`     | 이미지 Detection + Segmentation 통합 추론    |
+| `scripts/inference/predict_combined_video.py`     | 영상 통합 추론 및 1080p30 출력                |
 | `scripts/evaluation/evaluate_galuxy.py`           | 같은 클래스·IoU 0.5 기준 Detection 성능 평가 |
 
 ## 개발 환경

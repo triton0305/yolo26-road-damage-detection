@@ -18,6 +18,8 @@
 
 두 모델은 동일한 184장과 수정 정답 라벨 163개를 기준으로 비교했다. v4 revised는 v3 weighted보다 TP가 28개 증가하고 FP가 5개, FN이 28개 감소했다. F1은 0.500에서 0.659로 0.159 증가했다.
 
+AI Hub 기본 학습부터 v4 revised까지의 전체 학습 곡선과 epoch별 원본 지표는 [`results/detection`](detection/README.md)에 정리했다.
+
 ## 실험별 역할
 
 ### v3 weighted
@@ -45,3 +47,37 @@ python scripts/evaluation/evaluate_galuxy.py `
 ```
 
 예측 라벨은 `class_id x_center y_center width height confidence` 형식을 사용한다. 정답 라벨은 confidence가 없는 표준 YOLO 형식을 사용한다.
+
+## Segmentation 도메인 적응
+
+AI Hub 50,133장으로 학습된 `road_segment_yolo26s/weights/best.pt`에서 시작해 직접 촬영 이미지의 수동 폴리곤 라벨만 추가 학습했다. 기존 AI Hub 전체 데이터를 다시 학습하지 않고 사전학습 가중치를 유지한 상태에서 도메인을 보정하는 방식이다.
+
+### 수동 데이터 구성
+
+- 전체 52장
+- train 41장 / validation 11장
+- 수동 폴리곤 270개
+- 차선 268개 / 신축이음부 2개
+- 응력완화줄눈 관련 4개 클래스는 수동 표본 없음
+
+클래스 불균형이 매우 크므로 수동 데이터만으로 6개 클래스 전체의 성능을 평가할 수 없다. 특히 신축이음부와 응력완화줄눈 결과는 AI Hub 기반 모델의 영향이 크다.
+
+### 체크포인트 선택
+
+| 모델 | 설정 | 관찰 결과 | 사용 여부 |
+|---|---|---|---|
+| manual v1 final | 50 epochs, lr0 0.00005, freeze 10 | 차선 반영은 강하지만 수동 데이터 과적합 가능성 | 비교용 |
+| manual v2 light | lr0 0.00002, freeze 12, 조기 종료 | 수동 반영이 부족하고 기존 클래스 오탐 증가 | 제외 |
+| manual v1 epoch30 | v1의 30 epoch 체크포인트 | AI Hub 특성 유지와 수동 차선 반영의 중간점 | **최종 통합 사용** |
+
+최종 이미지 177장 추론에서 Segmentation confidence 0.50 기준 338개, Detection confidence 0.25 기준 111개가 표시됐다. 이 수치는 정답 라벨과 비교한 평가 지표가 아니라 출력 규모 확인용이다.
+
+세 실험의 전체 학습 곡선과 epoch별 원본 지표는 [`results/segmentation`](segmentation/README.md)에 별도로 정리했다. `manual v1`의 run-level PR 곡선과 혼동행렬은 최종 선택한 `epoch30.pt` 전용 결과가 아니므로 공개 비교 자료에서 제외했다.
+
+## 최종 통합 출력
+
+- 이미지: Segmentation 마스크·박스·태그 위에 Detection 박스·태그 합성
+- 영상: 1920×1080, 30fps, H.264 High Profile, 약 8Mbps
+- 오디오: 원본 AAC 48kHz 스테레오 보존
+- 표시 이름 변경: `절삭보수부파손` → `절삭보수부`, `긴급보수부파손` → `긴급보수부`
+- 모델 가중치와 생성 이미지·영상은 Git에 포함하지 않음

@@ -12,9 +12,31 @@
 /test/
 /result/
 /result_*/
+/outputs/
+/media/
 /results/*
 !/results/EXPERIMENTS.md
+!/results/detection/
+!/results/detection/*.md
+!/results/detection/*.csv
+!/results/segmentation/
+!/results/segmentation/*.md
+!/results/segmentation/*.csv
 *.cache
+
+# Raw and generated media
+*.jpg
+*.jpeg
+*.png
+*.bmp
+*.webp
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.m4v
+!/results/detection/*.png
+!/results/segmentation/*.png
 
 # Dataset labels and local notes
 *.txt
@@ -44,6 +66,7 @@ __pycache__/
 /scripts/data/import_anylabeling_json.py
 /scripts/data/prepare_galuxy_revised_dataset.py
 /scripts/inference/predict_galuxy_revised.py
+/scripts/inference/predict_segment_tagged.py
 
 # Files moved to their GitHub-facing locations
 /team02.pdf

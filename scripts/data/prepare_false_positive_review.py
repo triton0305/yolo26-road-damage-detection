@@ -1,12 +1,22 @@
+import argparse
 import csv
 import shutil
 from pathlib import Path
 
 
-LABELING_ROOT = Path(r"C:\Users\kccistc\Desktop\galuxy_ultra_labeling")
-PREDICTION_ROOT = Path(r"C:\Users\kccistc\Desktop\result_weighted")
-OUTPUT_ROOT = Path(r"C:\Users\kccistc\Desktop\galuxy_false_positive_review")
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+LABELING_ROOT = PROJECT_ROOT / "datasets" / "galuxy_ultra_labeling"
+PREDICTION_ROOT = PROJECT_ROOT / "outputs" / "result_weighted"
+OUTPUT_ROOT = PROJECT_ROOT / "datasets" / "galuxy_false_positive_review"
 IOU_THRESHOLD = 0.5
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Detection 오탐 후보를 검수 폴더로 모읍니다.")
+    parser.add_argument("--labeling-root", type=Path, default=LABELING_ROOT)
+    parser.add_argument("--prediction-root", type=Path, default=PREDICTION_ROOT)
+    parser.add_argument("--output", type=Path, default=OUTPUT_ROOT)
+    return parser.parse_args()
 
 
 def read_yolo(path: Path) -> list[tuple[int, float, float, float, float, float]]:
@@ -59,6 +69,12 @@ def false_predictions(image_stem: str) -> list[tuple]:
 
 
 def main() -> None:
+    global LABELING_ROOT, PREDICTION_ROOT, OUTPUT_ROOT
+    args = parse_args()
+    LABELING_ROOT = args.labeling_root.expanduser().resolve()
+    PREDICTION_ROOT = args.prediction_root.expanduser().resolve()
+    OUTPUT_ROOT = args.output.expanduser().resolve()
+
     if OUTPUT_ROOT.exists():
         raise FileExistsError(f"검수 폴더가 이미 있습니다: {OUTPUT_ROOT}")
 
@@ -113,9 +129,8 @@ def main() -> None:
     launcher = """@echo off
 chcp 65001 >nul
 set "PYTHONUTF8=1"
-set "APP=C:\\Users\\kccistc\\Desktop\\labeling_tools\\xanylabeling\\.venv\\Scripts\\xanylabeling.exe"
-set "WORK=C:\\Users\\kccistc\\Desktop\\galuxy_false_positive_review"
-"%APP%" --filename "%WORK%\\images" --output "%WORK%\\annotations_xlabel" --labels "%WORK%\\classes.txt" --validatelabel exact --autosave --nodata --nosortlabels --no-auto-update-check
+set "WORK=%~dp0"
+xanylabeling --filename "%WORK%images" --output "%WORK%annotations_xlabel" --labels "%WORK%classes.txt" --validatelabel exact --autosave --nodata --nosortlabels --no-auto-update-check
 if errorlevel 1 pause
 """
     (OUTPUT_ROOT / "오탐_검수_시작.cmd").write_text(launcher, encoding="utf-8")

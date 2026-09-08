@@ -1,4 +1,5 @@
-path: D:/road_yolo_detect
+# 실제 데이터셋 위치에 맞게 수정
+path: datasets/road_yolo_detect
 
 train: train/images
 val: valid/images

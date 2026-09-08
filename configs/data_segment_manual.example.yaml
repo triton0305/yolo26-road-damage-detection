@@ -1,5 +1,4 @@
-# 실제 데이터셋 위치에 맞게 수정
-path: datasets/road_yolo_segment
+path: datasets/galuxy_segment_manual
 
 train: train/images
 val: valid/images

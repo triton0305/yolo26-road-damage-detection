@@ -1,3 +1,4 @@
+import argparse
 import json
 import random
 import shutil
@@ -16,13 +17,14 @@ CAPTURE_GROUP_GAP_SECONDS = 3
 REHEARSAL_IMAGES_PER_CLASS = 20
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-LABELING_ROOT = Path(r"C:\Users\kccistc\Desktop\galuxy_ultra_labeling")
+LABELING_ROOT = PROJECT_ROOT / "datasets" / "galuxy_ultra_labeling"
 SOURCE_IMAGES = LABELING_ROOT / "images"
 SOURCE_LABELS = LABELING_ROOT / "labels_final_yolo"
-EXIF_SOURCE_IMAGES = Path(r"C:\Users\kccistc\Desktop\galuxy_ultra")
-OLD_TRAIN_IMAGES = Path(r"D:\road_yolo_detect\train\images")
-OLD_TRAIN_LABELS = Path(r"D:\road_yolo_detect\train\labels")
-DATASET_ROOT = Path(r"C:\Users\kccistc\Desktop\galuxy_ultra_finetune")
+EXIF_SOURCE_IMAGES = PROJECT_ROOT / "datasets" / "galuxy_ultra"
+OLD_DATASET_ROOT = PROJECT_ROOT / "datasets" / "road_yolo_detect"
+OLD_TRAIN_IMAGES = OLD_DATASET_ROOT / "train" / "images"
+OLD_TRAIN_LABELS = OLD_DATASET_ROOT / "train" / "labels"
+DATASET_ROOT = PROJECT_ROOT / "datasets" / "galuxy_ultra_finetune"
 
 CLASS_NAMES = [
     "아스팔트 도로파임",
@@ -39,6 +41,29 @@ CLASS_NAMES = [
     "배수로",
 ]
 EMPTY_FEATURE = len(CLASS_NAMES)
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Galaxy Detection 추가 학습 데이터셋을 구성합니다.")
+    parser.add_argument("--labeling-root", type=Path, default=LABELING_ROOT)
+    parser.add_argument("--exif-source", type=Path, default=EXIF_SOURCE_IMAGES)
+    parser.add_argument("--old-dataset", type=Path, default=OLD_DATASET_ROOT)
+    parser.add_argument("--output", type=Path, default=DATASET_ROOT)
+    return parser.parse_args()
+
+
+def configure_paths(args: argparse.Namespace) -> None:
+    global LABELING_ROOT, SOURCE_IMAGES, SOURCE_LABELS, EXIF_SOURCE_IMAGES
+    global OLD_TRAIN_IMAGES, OLD_TRAIN_LABELS, DATASET_ROOT
+
+    LABELING_ROOT = args.labeling_root.expanduser().resolve()
+    SOURCE_IMAGES = LABELING_ROOT / "images"
+    SOURCE_LABELS = LABELING_ROOT / "labels_final_yolo"
+    EXIF_SOURCE_IMAGES = args.exif_source.expanduser().resolve()
+    old_dataset = args.old_dataset.expanduser().resolve()
+    OLD_TRAIN_IMAGES = old_dataset / "train" / "images"
+    OLD_TRAIN_LABELS = old_dataset / "train" / "labels"
+    DATASET_ROOT = args.output.expanduser().resolve()
 
 
 def read_label(label_path: Path) -> tuple[set[int], Counter]:
@@ -302,4 +327,5 @@ def build_dataset() -> None:
 
 
 if __name__ == "__main__":
+    configure_paths(parse_args())
     build_dataset()

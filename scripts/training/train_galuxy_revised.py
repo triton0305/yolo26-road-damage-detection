@@ -1,3 +1,4 @@
+import argparse
 import os
 from pathlib import Path
 
@@ -7,7 +8,7 @@ from ultralytics import YOLO
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-MODEL_PATH = (
+DEFAULT_MODEL = (
     PROJECT_ROOT
     / "runs"
     / "detect"
@@ -15,18 +16,31 @@ MODEL_PATH = (
     / "weights"
     / "best.pt"
 )
-DATA_YAML = Path(r"C:\Users\kccistc\Desktop\galuxy_ultra_finetune_v3_revised\data.yaml")
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Galaxy 수정 데이터로 Detection v4를 추가 학습합니다.")
+    parser.add_argument("--model", type=Path, default=DEFAULT_MODEL, help="v3 weighted 가중치")
+    parser.add_argument("--data", type=Path, required=True, help="수정 데이터셋 YAML")
+    parser.add_argument("--project", type=Path, default=PROJECT_ROOT / "runs" / "detect")
+    parser.add_argument("--name", default="galuxy_finetune_v4_revised")
+    parser.add_argument("--device", default="0")
+    return parser.parse_args()
 
 
 def main() -> None:
-    if not MODEL_PATH.is_file():
-        raise FileNotFoundError(f"이전 최종 모델이 없습니다: {MODEL_PATH}")
-    if not DATA_YAML.is_file():
-        raise FileNotFoundError(f"수정 데이터 설정이 없습니다: {DATA_YAML}")
+    args = parse_args()
+    model_path = args.model.expanduser().resolve()
+    data_yaml = args.data.expanduser().resolve()
 
-    model = YOLO(str(MODEL_PATH))
+    if not model_path.is_file():
+        raise FileNotFoundError(f"이전 최종 모델이 없습니다: {model_path}")
+    if not data_yaml.is_file():
+        raise FileNotFoundError(f"수정 데이터 설정이 없습니다: {data_yaml}")
+
+    model = YOLO(str(model_path))
     model.train(
-        data=str(DATA_YAML),
+        data=str(data_yaml),
         epochs=60,
         patience=15,
         imgsz=1024,
@@ -44,13 +58,13 @@ def main() -> None:
         close_mosaic=10,
         workers=2,
         cache=False,
-        device=0,
+        device=args.device,
         amp=True,
         plots=True,
         save=True,
         save_period=5,
-        project=str(PROJECT_ROOT / "runs" / "detect"),
-        name="galuxy_finetune_v4_revised",
+        project=str(args.project),
+        name=args.name,
         seed=20260907,
         deterministic=True,
     )
