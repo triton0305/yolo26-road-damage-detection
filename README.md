@@ -381,11 +381,3 @@ runs/                 학습 체크포인트와 그래프, Git 제외
 * 수행기관: 에이치씨아이플러스(주)
 * 제공기관: 과학기술정보통신부 / 한국지능정보사회진흥원(NIA)
 * 링크: https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71781
-
-
-## 데이터 출처
-
-* 데이터셋: AI Hub 고해상도 도로 노면 데이터
-* 수행기관: 에이치씨아이플러스(주)
-* 제공기관: 과학기술정보통신부 / 한국지능정보사회진흥원(NIA)
-* 링크: https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=71781
