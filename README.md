@@ -109,7 +109,7 @@ Detection은 직접 촬영 데이터에 대한 추가 학습과 오탐 검수, �
 
 ## 🎥 Demo Video
 
-[![Road Surface Detection Demo](https://img.youtube.com/vi/BOlS7ECXjTI/0.jpg)](https://www.youtube.com/watch?v=BOlS7ECXjTI)
+[▶ Demo Video](https://www.youtube.com/watch?v=BOlS7ECXjTI)
 
 > 실제 도로 환경에서 수행한 모델 추론 데모입니다.
 
