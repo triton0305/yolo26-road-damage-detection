@@ -5,7 +5,6 @@
 | 구분 | 파일 | 용도 |
 |---|---|---|
 | 문서 | `README.md` | 프로젝트 개요, 결과, 실행 방법 |
-| 문서 | `results/EXPERIMENTS.md` | Detection·Segmentation 실험 기록 |
 | 결과 | `results/detection/` | Detection 4개 실험의 학습 곡선과 지표 CSV |
 | 결과 | `results/segmentation/` | Segmentation 3개 실험의 학습 곡선과 지표 CSV |
 | 환경 | `requirements.txt` | Python 의존성 |
@@ -62,4 +61,4 @@
 - TP / FP / FN: 92 / 24 / 71
 - Precision / Recall / F1: 0.793 / 0.564 / 0.659
 
-평가 기준과 실험별 차이는 `results/EXPERIMENTS.md`에 기록한다.
+평가 기준과 실험별 차이는 `results/detection/README.md`에 기록한다.

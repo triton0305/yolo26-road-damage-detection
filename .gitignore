@@ -15,7 +15,6 @@
 /outputs/
 /media/
 /results/*
-!/results/EXPERIMENTS.md
 !/results/detection/
 !/results/detection/*.md
 !/results/detection/*.csv
