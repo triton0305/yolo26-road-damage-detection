@@ -85,12 +85,6 @@ Detection은 직접 촬영 데이터에 대한 추가 학습과 오탐 검수, �
 
 최종 단계에서는 두 모델을 동일한 입력 이미지와 영상에 각각 적용한 뒤, Detection의 Bounding Box와 Segmentation의 Polygon Mask를 하나의 결과로 합성했습니다.
 
-## 🎥 Demo Video
-
-[![Road Surface Detection Demo](https://img.youtube.com/vi/BOlS7ECXjTI/0.jpg)](https://www.youtube.com/watch?v=BOlS7ECXjTI)
-
-> 실제 도로 환경에서 수행한 모델 추론 데모입니다.
-
 ## 결과 시각화
 
 동일한 실제 도로 이미지에 Detection과 Segmentation 모델을 각각 적용하고, 최종적으로 두 결과를 하나의 이미지에 통합했습니다.
@@ -113,6 +107,12 @@ Detection은 직접 촬영 데이터에 대한 추가 학습과 오탐 검수, �
 
 <img width="5712" height="3212" alt="picture_152" src="https://github.com/user-attachments/assets/9606959c-b63d-4ef2-a0bf-61a8f80a0bdf" />
 
+## 🎥 Demo Video
+
+[![Road Surface Detection Demo](https://img.youtube.com/vi/BOlS7ECXjTI/0.jpg)](https://www.youtube.com/watch?v=BOlS7ECXjTI)
+
+> 실제 도로 환경에서 수행한 모델 추론 데모입니다.
+
 ## 실험 및 평가
 
 ### Detection 실험 및 정량 평가
@@ -124,7 +124,7 @@ Galaxy 데이터의 비중을 높인 weighted 모델을 학습한 뒤 실제 이
 | Metric | Result |
 | --- | ---: |
 | Evaluation Images | 184 |
-| Ground Truth | 163 |
+| Ground Truth Boxes | 163 |
 | TP | 92 |
 | FP | 24 |
 | FN | 71 |
@@ -204,7 +204,7 @@ Input Image
 - 최종 실환경 Segmentation 결과에 대해 별도의 Ground Truth 기반 정량 평가를 수행하지 않아 체크포인트 선정에 실제 추론 결과에 대한 검수도 함께 활용했습니다.
 - 직접 촬영 데이터의 규모가 AI Hub 원본 데이터에 비해 작아 다양한 실제 도로 환경에 대한 추가 검증이 필요합니다.
 
-향후에는 클래스별 실환경 데이터를 추가 확보하고, Detection은 Precision·Recall·F1, Segmentation은 mIoU 등 각 Task에 적합한 정량 지표를 적용해 실제 촬영 환경에서의 성능을 체계적으로 검증할 계획입니다.
+향후에는 클래스별 실환경 데이터를 추가 확보하고, Detection은 Precision·Recall·F1, Segmentation은 Mask IoU·mAP 등 각 Task에 적합한 정량 지표를 적용해 실제 촬영 환경에서의 성능을 체계적으로 검증할 계획입니다.
 
 ## 프로젝트 구조
 
