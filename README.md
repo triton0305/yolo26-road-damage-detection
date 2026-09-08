@@ -24,7 +24,7 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
 * 최종 체크포인트: `galuxy_segment_manual_v1/weights/epoch30.pt`
 * Confidence threshold: `0.50`
 
-모델 가중치와 학습 결과는 용량 문제로 Git에 포함하지 않습니다. 실험별 변경점과 평가 기준은 [`results/EXPERIMENTS.md`](results)에 정리되어 있습니다.
+모델 가중치와 학습 결과는 용량 문제로 Git에 포함하지 않습니다. 실험별 변경점과 평가 기준은 [`results`](results)에 정리되어 있습니다.
 
 ## 프로젝트 파이프라인
 
