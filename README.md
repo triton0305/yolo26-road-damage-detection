@@ -1,6 +1,6 @@
 # YOLO26 도로 노면 Detection 및 Segmentation
 
-AI Hub의 고해상도 도로 노면 데이터와 직접 촬영한 Galaxy 이미지를 이용해 포트홀과 균열 등의 도로 손상을 Detection하고, 차선과 신축이음부 등의 도로 노면 요소를 Segmentation하는 프로젝트입니다.
+AI Hub의 고해상도 도로 노면 데이터와 직접 촬영한 Galaxy 이미지를 이용해 포트홀과 균열 등의 도로 손상 및 노면 객체를 Detection하고, 차선과 신축이음부 등의 도로 노면 요소를 Segmentation하는 프로젝트입니다.
 
 Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학습하고 실제 촬영 데이터로 추가 학습한 뒤, 최종적으로 두 모델을 동일 이미지와 영상에 적용해 Bounding Box와 Polygon Mask를 함께 출력했습니다.
 
@@ -123,7 +123,7 @@ Galaxy 데이터의 비중을 높인 weighted 모델을 학습한 뒤 실제 이
 
 | Metric | Result |
 | --- | ---: |
-| Test Images | 184 |
+| Evaluation Images | 184 |
 | Ground Truth | 163 |
 | TP | 92 |
 | FP | 24 |
@@ -152,7 +152,7 @@ v1은 학습 후반부에서 소량의 Galaxy 데이터에 과적합되는 경�
 
 따라서 이번 Segmentation 실험은 6개 클래스 전체의 성능 향상보다는 **AI Hub 기반 모델을 실제 Galaxy 촬영 환경에 적응시킨 소규모 Domain Adaptation 실험**으로 해석했습니다.
 
-별도의 Segmentation Ground Truth 기반 정량 평가는 수행하지 않았습니다.
+최종 실환경 추론 데이터에 대해서는 별도의 Ground Truth 기반 Segmentation 정량 평가를 수행하지 않았습니다.
 
 ### 통합 추론
 
@@ -174,7 +174,8 @@ Input Image
           Final Image / Video
 ```
 
-최종 이미지 추론 결과:
+최종 통합 추론은 177장의 실제 촬영 이미지에 대해 수행했습니다.
+
 - 입력 이미지: 177장
 - Detection 검출: 111개
   - 맨홀: 64개
@@ -188,7 +189,7 @@ Input Image
   - 신축이음부: 4개
   - 응력완화줄눈 계열: 4개
 
-Segmentation의 338개는 정답과 비교한 성능 지표가 아니라 모델이 최종 이미지에서 출력한 전체 Prediction 수입니다.
+위 검출 수는 정답과 비교한 성능 지표가 아니라 최종 이미지에서 모델이 출력한 Prediction 수입니다.
 
 최종 결과에는 Detection Bounding Box와 Segmentation Polygon Mask, 클래스 이름과 Confidence를 함께 표시했습니다.
 
@@ -200,10 +201,10 @@ Segmentation의 338개는 정답과 비교한 성능 지표가 아니라 모델�
 
 - Detection은 Precision 0.793에 비해 Recall이 0.564로 낮아 일부 실제 객체를 놓치는 FN이 존재합니다.
 - Segmentation 직접 라벨 270개 중 268개가 차선에 집중되어 있어 전체 6개 클래스의 실환경 성능을 검증하기에는 데이터 불균형이 큽니다.
-- Segmentation은 별도의 Ground Truth 기반 정량 평가를 수행하지 않아 최종 체크포인트 선정에 실환경 추론 결과가 함께 활용되었습니다.
+- 최종 실환경 Segmentation 결과에 대해 별도의 Ground Truth 기반 정량 평가를 수행하지 않아 체크포인트 선정에 실제 추론 결과에 대한 검수도 함께 활용했습니다.
 - 직접 촬영 데이터의 규모가 AI Hub 원본 데이터에 비해 작아 다양한 실제 도로 환경에 대한 추가 검증이 필요합니다.
 
-향후에는 클래스별 실환경 데이터를 추가 확보하고, Segmentation에 mIoU 등의 정량 평가를 적용해 Detection과 Segmentation 모두 실제 환경에서의 성능 변화를 보다 체계적으로 비교할 수 있도록 개선할 계획입니다.
+향후에는 클래스별 실환경 데이터를 추가 확보하고, Detection은 Precision·Recall·F1, Segmentation은 mIoU 등 각 Task에 적합한 정량 지표를 적용해 실제 촬영 환경에서의 성능을 체계적으로 검증할 계획입니다.
 
 ## 프로젝트 구조
 
