@@ -39,25 +39,33 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
                     │                           │
              기본 모델 학습               기본 모델 학습
                     │                           │
-          Galaxy Bounding Box          Galaxy Polygon 직접 라벨링
+          Galaxy 이미지 수집            Galaxy 이미지 수집
                     │                           │
-           v3 weighted 학습              manual v1 / v2 학습
+         Bounding Box 라벨링            Polygon 직접 라벨링
                     │                           │
-        오탐 검수 및 라벨 수정           체크포인트 비교
+          실환경 데이터 추가 학습         소규모 Domain Adaptation
                     │                           │
-           v4 revised 학습                 epoch30 선택
+        오탐 검수 및 라벨 수정           학습 강도별 모델 비교
+                    │                           │
+           최종 모델 재학습             중간 Checkpoint 선정
                     │                           │
              정량 성능 평가              실환경 추론 검수
                     │                           │
                     └─────────────┬─────────────┘
                                   │
-                         Detection + Segmentation
+                      Detection / Segmentation
+                           독립 모델 확정
+                                  │
+                                  ▼
                               통합 추론
                                   │
-                      이미지 / 영상 결과 출력
+                     ┌────────────┴────────────┐
+                     │                         │
+                  이미지 출력                 영상 출력
 ```
 
-최종 단계에서는 동일한 입력 이미지와 영상에 두 모델을 각각 적용한 뒤, Detection의 Bounding Box와 Segmentation의 Polygon Mask를 하나의 결과로 합성했습니다.
+최종 단계에서는 두 모델을 동일한 입력 이미지와 영상에 각각 적용한 뒤, Detection의 Bounding Box와 Segmentation의 Polygon Mask를 하나의 결과로 합성했습니다.
+
 
 ## 🎥 Demo Video
 
