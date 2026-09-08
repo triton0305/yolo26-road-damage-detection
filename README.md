@@ -9,12 +9,11 @@ Ultralytics YOLO26s 기반으로 Detection과 Segmentation 모델을 각각 학�
 ### Detection
 
 * 모델: YOLO26s
-* 학습 실행: `runs/detect/galuxy_finetune_v4_revised`
-* 가중치: `runs/detect/galuxy_finetune_v4_revised/weights/best.pt`
-* 평가 데이터: 직접 촬영 이미지 184장
-* 정답 박스: 163개
-* TP / FP / FN: 92 / 24 / 71
-* Precision / Recall / F1: 0.793 / 0.564 / 0.659
+* AI Hub 학습 데이터: 159,509장
+* AI Hub 검증 데이터: 19,939장
+* 직접 Bounding Box 라벨링: 184장 / 163개
+* 최종 체크포인트: `runs/detect/galuxy_finetune_v4_revised/weights/best.pt`
+* Confidence threshold: `0.25`
 
 ### Segmentation
 
