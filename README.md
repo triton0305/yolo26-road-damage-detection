@@ -13,9 +13,9 @@ AI Hub의 고해상도 도로 노면 데이터와 직접 촬영한 Galaxy 이미
 
 모델 가중치와 학습 결과는 용량 문제로 Git에 포함하지 않습니다. 실험별 변경점과 평가 기준은 [`results/EXPERIMENTS.md`](results/EXPERIMENTS.md)에 정리되어 있습니다.
 
-## 🎥 Real-World Inference Demo
+## 🎥 Demo Video
 
-[![YOLO Road Surface Detection Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
+[![Road Surface Detection Demo](https://img.youtube.com/vi/BOlS7ECXjTI/0.jpg)](https://www.youtube.com/watch?v=BOlS7ECXjTI)
 
 > AI Hub 고해상도 도로노면 이미지 데이터로 학습한 모델의 실도로 환경 추론 결과입니다.
 
