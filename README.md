@@ -160,8 +160,6 @@ v1은 학습 후반부에서 소량의 Galaxy 데이터에 과적합되는 경�
 
 따라서 이번 Segmentation 실험은 6개 클래스 전체의 성능 향상보다는 **AI Hub 기반 모델을 실제 Galaxy 촬영 환경에 적응시킨 소규모 Domain Adaptation 실험**으로 해석했습니다.
 
-최종 실환경 추론 데이터에 대해서는 별도의 Ground Truth 기반 Segmentation 정량 평가를 수행하지 않았습니다.
-
 ### 통합 추론
 
 최종 단계에서는 동일한 입력에 Detection 모델과 Segmentation 모델을 각각 실행하고 두 결과를 하나의 이미지와 영상으로 출력했습니다.
@@ -200,8 +198,6 @@ Input Image
 위 검출 수는 정답과 비교한 성능 지표가 아니라 최종 이미지에서 모델이 출력한 Prediction 수입니다.
 
 최종 결과에는 Detection Bounding Box와 Segmentation Polygon Mask, 클래스 이름과 Confidence를 함께 표시했습니다.
-
-영상에도 동일한 방식을 적용해 실제 재생시간을 유지하는 1080p 30fps H.264 MP4로 출력했습니다.
 
 ## 한계 및 개선 방향
 
@@ -246,14 +242,14 @@ runs/                 학습 체크포인트와 그래프, Git 제외
 - Python 3.11.15
 - Ultralytics 8.4.112
 - PyTorch 2.5.1+cu121
+- OpenCV 4.11.0
 - CUDA 12.1
 - GPU: NVIDIA GeForce RTX 4060 8GB
-- OpenCV 4.11.0
-- Pillow 12.2.0
-- PyYAML 6.0.3
-- imageio-ffmpeg 0.6.0
-- Detection Model: YOLO26s
-- Segmentation Model: YOLO26s-seg
+
+## 모델
+
+- Detection: YOLO26s
+- Segmentation: YOLO26s-seg
 
 ## 데이터 출처
 
