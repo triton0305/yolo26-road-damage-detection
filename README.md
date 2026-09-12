@@ -239,12 +239,12 @@ runs/                 학습 체크포인트와 그래프, Git 제외
 
 ## 개발 환경
 
+- GPU: NVIDIA GeForce RTX 4060 8GB
 - Python 3.11.15
 - Ultralytics 8.4.112
 - PyTorch 2.5.1+cu121
 - OpenCV 4.11.0
 - CUDA 12.1
-- GPU: NVIDIA GeForce RTX 4060 8GB
 
 ## 모델
 
